@@ -9,7 +9,6 @@ countMsg:
 outputMsg:
     .ascii  "The card is a %c = %d\012\000"
 
-
     .text
     .global main
     .type   main, %function
@@ -33,8 +32,8 @@ main:
     @ mov r0, r9
     @bl shuffleDeck
 
-    mov r0, r9
-    bl printDeck
+    @ mov r0, r9
+    @ bl printDeck
 
     @call shuffle
 
@@ -64,24 +63,13 @@ main:
     @if yes, dealer wins
     @else push (tie)
 
-fillDeck:
-    ldr r0, =countMsg
-    mov r1, r4
-    bl printf
-
-    sub r4, r4, #1 //decrement LCV
-
-    cmp r4, #0
-    bgt fillDeck  
 
 
 
 
 
-
-    mov r0, #0  @return 0
-
-        
+end:
+    mov r0, #0  @return 0     
     @ @epilogue
     sub sp, fp, #4
     pop {r4, r9, fp, pc}
